@@ -85,6 +85,15 @@ every public page:
 - **Custom script URL.** Set one if you serve a renamed tracker or proxy it.
 - **Cached pages.** If your site caches pages, cached copies change over only when their cache
   expires.
+- **Prerendered pages** (`export const prerender = true`) are built before any request and never
+  run plugin hooks, so they get no tracker. Keep a tag on those pages only, for example in the
+  layout:
+
+  ```astro
+  {Astro.isPrerendered && (
+    <script is:inline defer src="https://stats.example.com/script.js" data-website-id="…" />
+  )}
+  ```
 - **Admin pages** are never tracked.
 
 ## Permissions
