@@ -6,6 +6,7 @@ import type { ConnectionTestResult, SaveSettingsInput, SettingsView as Settings 
 import { CLOUD_ENABLED, type AuthMode, type CloudRegion, type Hosting } from "../shared/constants.js";
 import { defaultScriptUrl } from "../shared/tracker.js";
 import { callRoute } from "./api.js";
+import { TrackerCheck } from "./TrackerCheck.js";
 
 interface Draft {
 	hosting: Hosting;
@@ -271,23 +272,22 @@ export function SettingsView({ onSaved }: { onSaved?: () => void }) {
 					If your site caches pages, cached copies change over when their cache expires, not the moment you save.
 				</p>
 				{draft.injectScript ? (
-					<>
-						<Banner
-							variant="alert"
-							title="Remove any tracker already in your theme"
-							description="If the theme also includes the Umami script, every visit is counted twice. The theme must render EmDashHead."
-						/>
-						<Switch
-							label="The site uses Astro's <ClientRouter /> (view transitions)"
-							checked={draft.clientRouter}
-							onCheckedChange={(checked) => set("clientRouter", checked)}
-						/>
-						<p className="text-sm text-kumo-subtle">
-							Turn this on if your layout includes <code>&lt;ClientRouter /&gt;</code>. Pages then change without a full
-							load, and this counts each one once, including back and forward. Needs Umami 3.2 or later.
-						</p>
-					</>
+					<Banner
+						variant="alert"
+						title="Remove any tracker already in your theme"
+						description="If the theme also includes the Umami script, every visit is counted twice. The theme must render EmDashHead."
+					/>
 				) : null}
+				<Switch
+					label="The site uses Astro's <ClientRouter /> (view transitions)"
+					checked={draft.clientRouter}
+					onCheckedChange={(checked) => set("clientRouter", checked)}
+				/>
+				<p className="text-sm text-kumo-subtle">
+					Turn this on if your layout includes <code>&lt;ClientRouter /&gt;</code>. Pages then change without a full load,
+					and this counts each one once, including back and forward. Needs Umami 3.2 or later. It takes effect once the
+					tracker is on, so you can set it first.
+				</p>
 				<p className="text-sm text-kumo-subtle">
 					Tracker script: <code>{tracker ?? "set the Umami URL first"}</code>{" "}
 					<Button type="button" variant="ghost" size="sm" onClick={() => setShowCustomScript((v) => !v)}>
@@ -302,6 +302,15 @@ export function SettingsView({ onSaved }: { onSaved?: () => void }) {
 						value={draft.scriptUrl}
 						error={urlError(draft.scriptUrl)}
 						onChange={(event) => set("scriptUrl", event.target.value.trim())}
+					/>
+				) : null}
+				{settings.data ? (
+					<TrackerCheck
+						settings={{
+							websiteId: settings.data.values.websiteId,
+							injectScript: settings.data.values.injectScript,
+							clientRouter: settings.data.values.clientRouter,
+						}}
 					/>
 				) : null}
 			</Section>

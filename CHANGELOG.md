@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.4 (2026-10-28)
+
+- The `<ClientRouter />` switch is shown even while the tracker is off, so you can set it before
+  turning the tracker on. Before, a switch-over from a theme tag ran in the wrong mode for a moment.
+- New **Check the live site** button under Tracking: loads the home page as a visitor gets it and
+  reports a missing, duplicate or mismatched Umami tracker, or a `<ClientRouter />` page without
+  the matching setting.
+- README: prerendered pages don't get the tracker, and local development uses local settings.
+
 ## 0.1.3 (2026-10-28)
 
 - New tracker setting for sites that use Astro's `<ClientRouter />`: every page change, including

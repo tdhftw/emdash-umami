@@ -80,8 +80,12 @@ every public page:
   setting on, the plugin turns off Umami's automatic pageviews (`data-auto-pageview="false"`, so
   Umami 3.2 or later) and sends one pageview per page change from a small inline script. Click
   events (`data-umami-event`) keep working.
-- **Switching over from a theme tag.** Remove the theme's tag and turn the plugin's tracker on
-  as close together as you can: a gap loses visits, an overlap counts them twice.
+- **Switching over from a theme tag.** Set the `<ClientRouter />` switch first if you need it,
+  then remove the theme's tag and turn the plugin's tracker on as close together as you can: a
+  gap loses visits, an overlap counts them twice.
+- **Check the live site.** The button under Tracking loads your home page as a signed-out visitor
+  gets it, and reports a missing tracker, a duplicate one, one for a different website, or a
+  `<ClientRouter />` page without the matching setting. It looks at the home page only.
 - **Custom script URL.** Set one if you serve a renamed tracker or proxy it.
 - **Cached pages.** If your site caches pages, cached copies change over only when their cache
   expires.
@@ -95,6 +99,8 @@ every public page:
   )}
   ```
 - **Admin pages** are never tracked.
+- **Local development.** `astro dev` uses your local database's settings. If the tracker is on
+  there, local visits count in your Umami statistics too.
 
 ## Permissions
 

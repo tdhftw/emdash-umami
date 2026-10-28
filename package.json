@@ -1,6 +1,6 @@
 {
   "name": "@tdhftw/emdash-plugin-umami",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Umami analytics inside the EmDash CMS admin: an Analytics page, a dashboard widget and optional tracker injection, for self-hosted Umami",
   "type": "module",
   "main": "./dist/index.js",
