@@ -1,0 +1,76 @@
+{
+  "name": "@tdhftw/emdash-plugin-umami",
+  "version": "0.1.2",
+  "description": "Umami analytics inside the EmDash CMS admin: an Analytics page, a dashboard widget and optional tracker injection, for self-hosted Umami",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./admin": "./src/admin/index.tsx"
+  },
+  "files": [
+    "dist",
+    "src/admin",
+    "src/shared",
+    "CHANGELOG.md"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "pack:check": "npm pack --dry-run",
+    "prepublishOnly": "npm run typecheck && npm test && npm run build",
+    "prepare": "tsdown"
+  },
+  "peerDependencies": {
+    "@cloudflare/kumo": "^2.0.0",
+    "@emdash-cms/admin": "^1.0.0",
+    "@tanstack/react-query": "^5.0.0",
+    "emdash": "^1.0.0",
+    "react": "^18.0.0 || ^19.0.0",
+    "astro": ">=7.0.0"
+  },
+  "dependencies": {
+    "echarts": "^6.1.0"
+  },
+  "devDependencies": {
+    "@cloudflare/kumo": "2.6.0",
+    "@emdash-cms/admin": "1.0.1",
+    "@tanstack/react-query": "5.90.21",
+    "@types/react": "19.3.0",
+    "astro": "7.3.5",
+    "emdash": "1.0.1",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "tsdown": "^0.23.0",
+    "typescript": "~6.0.3",
+    "vitest": "^5.0.2"
+  },
+  "keywords": [
+    "emdash",
+    "emdash-plugin",
+    "umami",
+    "analytics"
+  ],
+  "author": "Thord D. Hedengren <tdh@tdh.se>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tdhftw/emdash-umami.git"
+  },
+  "homepage": "https://github.com/tdhftw/emdash-umami#readme",
+  "bugs": "https://github.com/tdhftw/emdash-umami/issues",
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
