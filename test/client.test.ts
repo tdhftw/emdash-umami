@@ -13,6 +13,7 @@ const base: UmamiSettings = {
 	password: null,
 	websiteId: "w1",
 	injectScript: false,
+	clientRouter: false,
 	scriptUrl: null,
 };
 

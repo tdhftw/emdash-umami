@@ -39,5 +39,6 @@ export interface SaveSettingsInput {
 	password?: string | null;
 	websiteId?: string | null;
 	injectScript?: boolean;
+	clientRouter?: boolean;
 	scriptUrl?: string | null;
 }

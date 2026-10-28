@@ -42,6 +42,7 @@ export const saveSettingsInput = z.object({
 	password: secretInput,
 	websiteId: optionalText,
 	injectScript: z.boolean().optional(),
+	clientRouter: z.boolean().optional(),
 	scriptUrl: optionalUrl,
 });
 export type { SaveSettingsInput } from "../shared/api-types.js";
@@ -69,6 +70,7 @@ export async function saveSettings(ctx: RouteContext<SaveSettingsInput>): Promis
 	put("password", input.password);
 	put("websiteId", input.websiteId);
 	put("injectScript", input.injectScript);
+	put("clientRouter", input.clientRouter);
 	put("scriptUrl", input.scriptUrl);
 	await Promise.all(writes);
 

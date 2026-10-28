@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.3 (2026-10-28)
+
+- New tracker setting for sites that use Astro's `<ClientRouter />`: every page change, including
+  back and forward, is counted once. Without it, Umami misses back and forward navigation, and a
+  tag with `data-astro-rerun` counts each link click twice. Needs Umami 3.2 or later.
+- README: the setting above, and how to switch over from a tracker tag in the theme.
+
 ## 0.1.2 (2026-10-28)
 
 First release on npm. No code changes since 0.1.1.

@@ -2,7 +2,7 @@
 export const PLUGIN_ID = "umami";
 
 /** Keep in sync with package.json; test/plugin.test.ts enforces it. */
-export const PLUGIN_VERSION = "0.1.2";
+export const PLUGIN_VERSION = "0.1.3";
 
 export const PACKAGE_NAME = "@tdhftw/emdash-plugin-umami";
 

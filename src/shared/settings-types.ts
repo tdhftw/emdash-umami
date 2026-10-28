@@ -8,6 +8,7 @@ export interface UmamiSettingsValues {
 	username: string | null;
 	websiteId: string | null;
 	injectScript: boolean;
+	clientRouter: boolean;
 	scriptUrl: string | null;
 }
 

@@ -73,6 +73,12 @@ export const settingsSchema = {
 		label: "Add the Umami tracker to public pages",
 		default: false,
 	},
+	clientRouter: {
+		type: "boolean",
+		label: "The site uses Astro's <ClientRouter /> (view transitions)",
+		description: "Counts every page change, including back and forward, once.",
+		default: false,
+	},
 	scriptUrl: {
 		type: "url",
 		label: "Custom tracker script URL",
@@ -122,6 +128,7 @@ export async function readSettings(settings: SettingsReader): Promise<UmamiSetti
 		password: typeof raw.password === "string" && raw.password.length > 0 ? raw.password : null,
 		websiteId: str(raw.websiteId),
 		injectScript: raw.injectScript === true,
+		clientRouter: raw.clientRouter === true,
 		scriptUrl: normalizeScriptUrl(str(raw.scriptUrl)),
 	};
 }

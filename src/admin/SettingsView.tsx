@@ -17,6 +17,7 @@ interface Draft {
 	password: string;
 	websiteId: string;
 	injectScript: boolean;
+	clientRouter: boolean;
 	scriptUrl: string;
 }
 
@@ -32,6 +33,7 @@ function draftFrom(s: Settings): Draft {
 		password: "",
 		websiteId: v.websiteId ?? "",
 		injectScript: v.injectScript,
+		clientRouter: v.clientRouter,
 		scriptUrl: v.scriptUrl ?? "",
 	};
 }
@@ -43,6 +45,7 @@ function toInput(d: Draft): SaveSettingsInput {
 		authMode: d.hosting === "cloud" ? "apiKey" : d.authMode,
 		websiteId: d.websiteId || null,
 		injectScript: d.injectScript,
+		clientRouter: d.clientRouter,
 		scriptUrl: d.scriptUrl || null,
 	};
 	if (d.hosting === "self-hosted") input.baseUrl = d.baseUrl || null;
@@ -268,11 +271,22 @@ export function SettingsView({ onSaved }: { onSaved?: () => void }) {
 					If your site caches pages, cached copies change over when their cache expires, not the moment you save.
 				</p>
 				{draft.injectScript ? (
-					<Banner
-						variant="alert"
-						title="Remove any tracker already in your theme"
-						description="If the theme also includes the Umami script, every visit is counted twice. The theme must render EmDashHead."
-					/>
+					<>
+						<Banner
+							variant="alert"
+							title="Remove any tracker already in your theme"
+							description="If the theme also includes the Umami script, every visit is counted twice. The theme must render EmDashHead."
+						/>
+						<Switch
+							label="The site uses Astro's <ClientRouter /> (view transitions)"
+							checked={draft.clientRouter}
+							onCheckedChange={(checked) => set("clientRouter", checked)}
+						/>
+						<p className="text-sm text-kumo-subtle">
+							Turn this on if your layout includes <code>&lt;ClientRouter /&gt;</code>. Pages then change without a full
+							load, and this counts each one once, including back and forward. Needs Umami 3.2 or later.
+						</p>
+					</>
 				) : null}
 				<p className="text-sm text-kumo-subtle">
 					Tracker script: <code>{tracker ?? "set the Umami URL first"}</code>{" "}

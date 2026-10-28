@@ -74,6 +74,14 @@ every public page:
   templates do.
 - **Avoid double counting.** Remove any Umami script the theme already includes, or every visit
   is counted twice.
+- **Astro's `<ClientRouter />`.** If your layout uses it, also turn on **The site uses Astro's
+  `<ClientRouter />`**. Pages then change without a full load: Umami on its own misses back and
+  forward, and a tracker tag with `data-astro-rerun` counts every link click twice. With the
+  setting on, the plugin turns off Umami's automatic pageviews (`data-auto-pageview="false"`, so
+  Umami 3.2 or later) and sends one pageview per page change from a small inline script. Click
+  events (`data-umami-event`) keep working.
+- **Switching over from a theme tag.** Remove the theme's tag and turn the plugin's tracker on
+  as close together as you can: a gap loses visits, an overlap counts them twice.
 - **Custom script URL.** Set one if you serve a renamed tracker or proxy it.
 - **Cached pages.** If your site caches pages, cached copies change over only when their cache
   expires.
